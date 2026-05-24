@@ -163,7 +163,13 @@ elif st.session_state.current_page == "portal":
       def load_frozen_weights():
         dev = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         net = BrainTumorCNN(num_classes=2)
-        net.load_state_dict(torch.load("brain_tumor_model.pth", map_location=dev, weights_only=True))
+        
+        # --- NEW DYNAMIC PATH LOGIC ---
+        # Get the absolute directory where app.py is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(current_dir, "brain_tumor_model.pth")
+        
+        net.load_state_dict(torch.load(model_path, map_location=dev, weights_only=True))
         net.to(dev)
         net.eval()
         return net, dev
