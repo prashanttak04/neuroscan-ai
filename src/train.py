@@ -7,11 +7,9 @@ from dataset import BrainTumorDataset
 from model import BrainTumorCNN
 
 def train_model():
-  # Hardware setup: Use Apple Silicon GPU (MPS) if available, otherwise CPU
   device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
   print(f"Training on device: {device}")
 
-  # Set up the Conveyor Belt (DataLoader)
   print("Loading dataset...")
   dataset = BrainTumorDataset(raw_data_dir="../data/raw")
 
@@ -19,7 +17,6 @@ def train_model():
 
   model = BrainTumorCNN(num_classes=2).to(device)
 
-  # Set up the Judge (Loss) and the Mechanic (Optimizer)
   criterion = nn.CrossEntropyLoss()
   optimizer = optim.Adam(model.parameters(), lr=0.0001)
 
@@ -36,7 +33,6 @@ def train_model():
       images = images.to(device)
       labels = labels.to(device)
       
-      # Clear the mechanic's tools from the last batch
       optimizer.zero_grad()
       
       # Forward Pass
