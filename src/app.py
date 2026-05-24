@@ -5,12 +5,11 @@ import os
 from model import BrainTumorCNN
 from preprocess import crop_brain_contour
 
-# --- 1. Page Configuration & Custom CSS ---
 st.set_page_config(page_title="NeuroScan AI", layout="wide")
 
 st.markdown("""
   <style>
-  /* Import a premium Google Font */
+  /* Importing a premium Google Font */
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
   /* Force Streamlit to use it everywhere */
@@ -74,16 +73,12 @@ st.markdown("""
   </style>
   """, unsafe_allow_html=True)
 
-# --- 2. Session State Management ---
-# Buttons don't remember if they were clicked, so we use session_state to track the page
 if "current_page" not in st.session_state:
   st.session_state.current_page = "portal"
 
-# --- 3. Sidebar Navigation & Telemetry ---
 with st.sidebar:
   st.markdown("### Resource Hub")
   
-  # Card-style Navigation Buttons
   if st.button("Diagnostic Portal", use_container_width=True):
     st.session_state.current_page = "portal"
     
@@ -101,7 +96,6 @@ with st.sidebar:
   device_name = "Apple Silicon GPU (MPS)" if torch.backends.mps.is_available() else "CPU"
   st.info(f"Computing on: {device_name}")
 
-# --- 4. View Routing Logic ---
 
 if st.session_state.current_page == "guide":
   # ==========================================
