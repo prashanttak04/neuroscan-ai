@@ -1,5 +1,5 @@
-streamlit==1.32.0
-torch==2.2.1
-torchvision==0.17.1
-opencv-python-headless==4.9.0.80
-numpy==1.26.4
+streamlit
+torch --extra-index-url https://download.pytorch.org/whl/cpu
+torchvision --extra-index-url https://download.pytorch.org/whl/cpu
+opencv-python-headless
+numpy<2.0.0
